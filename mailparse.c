@@ -70,6 +70,28 @@ static zend_function_entry mimemessage_methods[] = {
 	{NULL, NULL, NULL}
 };
 
+static const zend_module_dep mailparse_deps[] = {
+	ZEND_MOD_REQUIRED("mbstring")
+	ZEND_MOD_REQUIRED("json")
+	ZEND_MOD_REQUIRED("spl")
+	ZEND_MOD_REQUIRED("standard")
+	ZEND_MOD_END
+};
+
+zend_module_entry mailparse_module_entry = {
+	STANDARD_MODULE_HEADER_EX, NULL,
+	mailparse_deps
+	"mailparse",
+	mailparse_functions,
+	PHP_MINIT(mailparse),
+	PHP_MSHUTDOWN(mailparse),
+	PHP_RINIT(mailparse),
+	PHP_RSHUTDOWN(mailparse),
+	PHP_MINFO(mailparse),
+	PHP_MAILPARSE_VERSION,
+	STANDARD_MODULE_PROPERTIES
+};
+
 static zend_class_entry *mimemsg_class_entry;
 
 zend_function_entry mailparse_functions[] = {
